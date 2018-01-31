@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+from django.conf import settings
+from django.core.mail import send_mail
 from django.shortcuts import render
 
 from .forms import ContactForm, RegModelForm
@@ -52,15 +53,21 @@ def inicio(request):
 
 
 def Contact(request):
-    form =ContactForm(request.POST or None)
+    form = ContactForm(request.POST or None)
     if form.is_valid():
-        
-        email=form.cleaned_data.get("email")
-        mensaje=form.cleaned_data.get("mensaje")
-        nombre=form.cleaned_data.get("nombre")
-        print (email,mensaje,nombre)
-    contexto={
-        "form":form,
 
-    }
+        form_email = form.cleaned_data.get('email')
+        form_mensaje = form.cleaned_data.get('mensaje')
+        form_nombre = form.cleaned_data.get('nombre')
+        asunto = 'form de contacto'
+        email_from = settings.EMAIL_HOST_USER
+        email_mensaje = "%s: %s enviado por %s" %(form_nombre,form_email,form_mensaje) 
+        email_to = [email_from,"otroemaill@gmail.com"] 
+        send_mail(asunto, email_mensaje, email_from, email_to,
+                  fail_silently=False)
+
+        #print (email, mensaje, nombre)
+    contexto = {'form': form}
+
+
     return render(request,"forms.html",contexto)

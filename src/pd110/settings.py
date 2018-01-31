@@ -26,7 +26,17 @@ SECRET_KEY = 'fyo5dufzb3)mo_vhejt^xt=zf)-@s1d=lqywmfq681ek&vwe67'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='tu_email@gmail.com'
+EMAIL_HOST_PASSWORD='********'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
 
+'''
+Para usar gmail hay que desbloquear el captcha
+https://accounts.google.com/DisplayUnlockCaptcha
+
+'''
 
 # Application definition
 
