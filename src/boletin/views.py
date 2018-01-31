@@ -3,7 +3,7 @@
 
 from django.shortcuts import render
 
-from .forms import RegForm, RegModelForm
+from .forms import ContactForm, RegModelForm
 from .models import Registrado
 
 
@@ -47,10 +47,20 @@ def inicio(request):
         # obj.email =abc
         # obj.save()
 
-    
 
     return render(request, 'inicio.html', contexto)
 
 
+def Contact(request):
+    form =ContactForm(request.POST or None)
+    if form.is_valid():
+        
+        email=form.cleaned_data.get("email")
+        mensaje=form.cleaned_data.get("mensaje")
+        nombre=form.cleaned_data.get("nombre")
+        print (email,mensaje,nombre)
+    contexto={
+        "form":form,
 
-			
+    }
+    return render(request,"forms.html",contexto)
