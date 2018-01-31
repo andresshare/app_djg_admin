@@ -49,7 +49,7 @@ def inicio(request):
         # obj.save()
 
 
-    return render(request, 'base.html', contexto)
+    return render(request, 'inicio.html', contexto)
 
 
 def Contact(request):
